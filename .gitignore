@@ -1,0 +1,8 @@
+build
+.settings
+.cproject
+.project
+*.orig
+*.txt
+*.log
+*.txt
