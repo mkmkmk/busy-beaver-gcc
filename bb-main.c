@@ -54,6 +54,7 @@ int state_tb[SYMBOL_N][STATE_N] =
 
 // https://bbchallenge.org/1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA
 // https://wiki.bbchallenge.org/wiki/5-state_busy_beaver_winner
+// https://turingmachine.io/?import-gist=629b48aa50f09954adbf90023c326fb2
 
 #define STATE_N (5)
 #define SYMBOL_N (2)

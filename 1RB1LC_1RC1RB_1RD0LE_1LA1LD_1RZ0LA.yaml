@@ -1,0 +1,35 @@
+name: 1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA
+source code: |
+  # https://turingmachine.io/?import-gist=TODO
+  # https://bbchallenge.org/1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA
+  # Wiki entry: 5-state busy beaver winner
+  # https://gist.github.com/mkmkmk/TODO
+
+  input: '0'
+  blank: '0'
+  start state: A
+  table:
+    A:
+      0  : {write: 1, R: B}
+      1  : {write: 1, L: C} 
+    B:
+      0  : {write: 1, R: C}
+      1  : {write: 1, R: B} 
+    C:
+      0  : {write: 1, R: D}
+      1  : {write: 0, L: E} 
+    D:
+      0  : {write: 1, L: A}
+      1  : {write: 1, L: D} 
+    E:
+      0  : {write: 1, R: Z}
+      1  : {write: 0, L: A} 
+    Z:  
+      
+positions:
+  A: {x: 225.61, y: 266.72}
+  B: {x: 343.23, y: 82.02}
+  C: {x: 588.22, y: 79.05}
+  D: {x: 460.32, y: 425.19}
+  E: {x: 651.67, y: 276.89}
+  Z: {x: 751.32, y: 279.08}
