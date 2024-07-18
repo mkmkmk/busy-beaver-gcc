@@ -53,6 +53,7 @@ int state_tb[SYMBOL_N][STATE_N] =
 #elif 1
 
 // https://bbchallenge.org/1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA
+// https://wiki.bbchallenge.org/wiki/5-state_busy_beaver_winner
 
 #define STATE_N (5)
 #define SYMBOL_N (2)
@@ -96,12 +97,34 @@ int main(void)
     while (1)
     {
 
-        if (state < 0 || step < 5 || (step % 1000000) == 0)
+        // if (state < 0 || step < 1000 || (step % 1000000) == 0)
+
+        // https://arxiv.org/pdf/0906.3749
+        // 5-state BB winer readouts
+        // "Let C(n) = ...0(A0)1n0..."
+        if (state == 0 || state < 0)
         {
-            printf("%10d: ", step);
+            int s = 0;
+            int ss = 0;
+            int mss = 0;
+            int one = 0;
+            int sel = 0;
             for (int i = 0; i < TAPE_N; ++i)
-                printf("%c%c ", i == header ? "hABCDEFGHIJ"[1 + state] : ' ', "_1"[tape[i]]);
-            printf("\n");
+            {
+                s += tape[i];
+                if (tape[i]) ss++; else ss = 0;
+                if (mss<ss) mss = ss;
+                if (one == 0 && tape[i]) one = 1;
+                if (i == header && !one && i < TAPE_N-2 && tape[i+1]) sel = 1;
+            }
+            if (state < 0 || step == 0 || (mss == s && sel))
+            {
+                printf("%10d: ", step);
+                printf(" (%5d,%5d, %c) ", s, mss, "hABCDEFGHIJ"[1 + state]);
+                for (int i = 0; i < TAPE_N; ++i)
+                    printf("%c%c ", i == header ? "hABCDEFGHIJ"[1 + state] : ' ', "_1"[tape[i]]);
+                printf("\n");
+            }
         }
 
         if (state == -1)
